@@ -30,7 +30,8 @@ def view_name():
 @app.route("/new_user/<name>")
 def add_new(name): # add a new record
     cur3 = mysql.connection.cursor()
-    cur3.execute('''INSERT INTO STUDENTS (studentName) VALUES (%s)''' % name)
+    cur3.execute('''INSERT INTO STUDENTS (studentName) VALUES ('%s')''' % name)
+    cur3.execute('''COMMIT''')
     rv3 = cur3.fetchall()
     return str(rv3)
 
